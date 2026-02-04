@@ -1,0 +1,30 @@
+.features {
+  padding: 140px 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.features-title {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 48px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.feature-card {
+  padding: 28px;
+  border-radius: 16px;
+  background: #fffef9;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  font-size: 16px;
+  color: #0f172a;
+}
+.features-input {
+  margin: 48px 0 64px;
+}
