@@ -2,8 +2,8 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import "./Hero.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
 
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const heroRef = useRef(null);
@@ -12,19 +12,13 @@ export default function Hero() {
   const underlineRef = useRef(null);
   const subRef = useRef(null);
   const actionsRef = useRef([]);
-const arrowRef = useRef(null);
-const bgRef = useRef(null);
-
+  const arrowRef = useRef(null);
+  const bgRef = useRef(null);
 
   useEffect(() => {
-   
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    tl.fromTo(
-      heroRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.4 }
-    )
+    tl.fromTo(heroRef.current, { opacity: 0 }, { opacity: 1, duration: 0.4 })
       .fromTo(
         titleRef.current,
         { y: 40, opacity: 0 },
@@ -52,15 +46,9 @@ const bgRef = useRef(null);
       .fromTo(
         actionsRef.current,
         { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.4,
-          stagger: 0.12,
-        },
+        { y: 0, opacity: 1, duration: 0.4, stagger: 0.12 },
         "-=0.2"
       );
-
 
     gsap.to(accentRef.current, {
       backgroundPosition: "200% center",
@@ -68,7 +56,6 @@ const bgRef = useRef(null);
       repeat: -1,
       ease: "linear",
     });
-
 
     gsap.to(underlineRef.current, {
       opacity: 0.4,
@@ -78,64 +65,76 @@ const bgRef = useRef(null);
       ease: "sine.inOut",
     });
 
-gsap.to(arrowRef.current, {
-  y: 8,
-  duration: 1.4,
-  repeat: -1,
-  yoyo: true,
-  ease: "sine.inOut",
-});
+    gsap.to(arrowRef.current, {
+      y: 8,
+      duration: 1.4,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
 
+    gsap.to(arrowRef.current, {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: arrowRef.current,
+        start: "top bottom",
+        scrub: true,
+      },
+    });
 
-gsap.to(arrowRef.current, {
-  opacity: 0,
-  scrollTrigger: {
-    trigger: arrowRef.current,
-    start: "top bottom",
-    scrub: true,
-  },
-});
+    // 🧠 Cursor-based grid parallax (ONLY movement)
+    const handleMouseMove = (e) => {
+      if (!heroRef.current || !bgRef.current) return;
 
+      const rect = heroRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      gsap.to(bgRef.current, {
+        x: x * 0.04,
+        y: y * 0.04,
+        duration: 0.6,
+        ease: "power3.out",
+      });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to(bgRef.current, {
+        x: 0,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+    };
+
+    heroRef.current.addEventListener("mousemove", handleMouseMove);
+    heroRef.current.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      heroRef.current?.removeEventListener("mousemove", handleMouseMove);
+      heroRef.current?.removeEventListener("mouseleave", handleMouseLeave);
+    };
   }, []);
+
   const animateButton = (btn) => {
-  const top = btn.querySelector(".btn-text-top");
-  const bottom = btn.querySelector(".btn-text-bottom");
+    const top = btn.querySelector(".btn-text-top");
+    const bottom = btn.querySelector(".btn-text-bottom");
+    if (!top || !bottom) return;
 
-  if (!top || !bottom) return;
+    gsap.killTweensOf([top, bottom]);
 
-  gsap.killTweensOf([top, bottom]);
+    gsap.fromTo(
+      top,
+      { y: 0, opacity: 1 },
+      { y: -12, opacity: 0, duration: 0.2, ease: "power2.out" }
+    );
 
-  gsap.fromTo(
-    top,
-    { y: 0, opacity: 1 },
-    { y: -12, opacity: 0, duration: 0.2, ease: "power2.out" }
-  );
-
-  gsap.fromTo(
-    bottom,
-    { y: 12, opacity: 0 },
-    { y: 0, opacity: 1, duration: 0.25, ease: "power2.out", delay: 0.05 }
-  );
-gsap.to(bgRef.current, {
-  x: 120,
-  y: -80,
-  rotation: 8,
-  duration: 18,
-  repeat: -1,
-  yoyo: true,
-  ease: "sine.inOut",
-});
-
-gsap.to(bgRef.current, {
-  opacity: 0.45,
-  duration: 4,
-  repeat: -1,
-  yoyo: true,
-  ease: "sine.inOut",
-});
-};
-
-
+    gsap.fromTo(
+      bottom,
+      { y: 12, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.25, ease: "power2.out", delay: 0.05 }
+    );
+  };
 
   return (
     <section ref={heroRef} className="hero">
