@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./InputSection.css";
+import { speechToText } from "../../services/SarvamAIService";
 
 const TONES = [
   { id: "formal", label: "🎩 Formal", description: "Professional & polished" },
@@ -8,85 +9,73 @@ const TONES = [
 ];
 
 export default function InputSection({ value, onChange, tone, onToneChange, onGenerate, loading }) {
-  const recognitionRef = useRef(null);
+  const mediaRecorderRef = useRef(null);
+  const chunksRef = useRef([]);
   const [listening, setListening] = useState(false);
+  const [processingAudio, setProcessingAudio] = useState(false);
   const [micError, setMicError] = useState("");
-  const valueRef = useRef(value);
 
-  // Keep valueRef in sync with value prop
-  useEffect(() => {
-    valueRef.current = value;
-  }, [value]);
+  const startRecording = async () => {
+    try {
+      setMicError("");
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      // MediaRecorder defaults to webm/opus in Chrome/Firefox or mp4/aac in Safari often
+      // We explicitly request audio/webm if possible, or fallback to default
+      let options = {};
+      if (MediaRecorder.isTypeSupported('audio/webm')) {
+        options = { mimeType: 'audio/webm' };
+      }
 
-  useEffect(() => {
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
+      const mediaRecorder = new MediaRecorder(stream, options);
 
-    if (!SpeechRecognition) {
-      setMicError("Speech recognition not supported in this browser");
-      return;
-    }
+      chunksRef.current = [];
 
-    const recognition = new SpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    recognition.lang = "hi-IN";
-
-    recognition.onresult = (event) => {
-      let interimTranscript = "";
-      let finalTranscript = "";
-
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        const transcript = event.results[i][0].transcript;
-        if (event.results[i].isFinal) {
-          finalTranscript += transcript;
-        } else {
-          interimTranscript += transcript;
+      mediaRecorder.ondataavailable = (e) => {
+        if (e.data.size > 0) {
+          chunksRef.current.push(e.data);
         }
-      }
+      };
 
-      // Append final transcript to existing value
-      if (finalTranscript) {
-        const newValue = valueRef.current + (valueRef.current ? " " : "") + finalTranscript;
-        onChange(newValue);
-      }
-    };
+      mediaRecorder.onstop = async () => {
+        const audioBlob = new Blob(chunksRef.current, { type: 'audio/webm' });
+        setProcessingAudio(true);
 
-    recognition.onerror = (event) => {
-      console.error("Speech recognition error:", event.error);
-      if (event.error === "not-allowed") {
-        setMicError("Microphone access denied. Please allow mic permission.");
-      } else if (event.error === "no-speech") {
-        setMicError("No speech detected. Try again.");
-      } else {
-        setMicError(`Error: ${event.error}`);
-      }
+        // Stop all tracks to release mic
+        stream.getTracks().forEach(track => track.stop());
+
+        const response = await speechToText(audioBlob);
+
+        if (response.success) {
+          const newValue = value + (value ? " " : "") + response.transcript;
+          onChange(newValue);
+        } else {
+          setMicError(response.error || "Failed to transcribe audio");
+        }
+        setProcessingAudio(false);
+      };
+
+      mediaRecorder.start();
+      mediaRecorderRef.current = mediaRecorder;
+      setListening(true);
+    } catch (err) {
+      console.error("Mic Error:", err);
+      setMicError("Microphone access denied or not available");
       setListening(false);
-    };
-
-    recognition.onend = () => setListening(false);
-    recognitionRef.current = recognition;
-  }, [onChange]);
-
-  const toggleListening = async () => {
-    if (!recognitionRef.current) {
-      setMicError("Speech recognition not available");
-      return;
     }
+  };
 
-    setMicError("");
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && listening) {
+      mediaRecorderRef.current.stop();
+      setListening(false);
+    }
+  };
 
+  const toggleListening = () => {
     if (listening) {
-      recognitionRef.current.stop();
+      stopRecording();
     } else {
-      try {
-        onChange(""); // Clear previous comments
-        recognitionRef.current.start();
-        setListening(true);
-      } catch (error) {
-        console.error("Failed to start recognition:", error);
-        setMicError("Failed to start microphone");
-      }
+      startRecording();
     }
   };
 
@@ -123,12 +112,13 @@ export default function InputSection({ value, onChange, tone, onToneChange, onGe
           <button
             className={`mic-btn ${listening ? "active" : ""}`}
             onClick={toggleListening}
-            disabled={loading}
+            disabled={loading || processingAudio}
             title={listening ? "Stop listening" : "Start speaking"}
           >
             {listening ? "🔴" : "🎙"}
           </button>
           {listening && <span className="listening-indicator">Listening...</span>}
+          {processingAudio && <span className="listening-indicator">Processing...</span>}
           {micError && <span className="mic-error">{micError}</span>}
         </div>
 

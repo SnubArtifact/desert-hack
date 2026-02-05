@@ -182,7 +182,7 @@ export async function speechToText(audioBlob) {
   try {
     const formData = new FormData();
     formData.append('file', audioBlob, 'recording.webm');
-    formData.append('model', 'saarika:v2');
+    formData.append('model', 'saarika:v2.5');
     formData.append('language_code', 'hi-IN');
 
     const response = await fetch('https://api.sarvam.ai/speech-to-text', {
@@ -194,8 +194,17 @@ export async function speechToText(audioBlob) {
     });
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.message || `STT API failed with status ${response.status}`);
+      const errorText = await response.text();
+      console.error('STT API Error Response Body:', errorText);
+      let errorData = {};
+      try {
+        errorData = JSON.parse(errorText);
+      } catch (e) {
+        // failed to parse
+      }
+
+      const errorMessage = errorData.message || errorData.detail || `STT API failed with status ${response.status}: ${errorText}`;
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();
