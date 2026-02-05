@@ -1,0 +1,16 @@
+# Root level ignores
+node_modules/
+.env
+.env.local
+*.log
+.DS_Store
+.vscode/
+.idea/
+
+# Frontend build
+frontend/build/
+frontend/dist/
+
+# Dependencies lock (let each package manage its own)
+package-lock.json
+yarn.lock

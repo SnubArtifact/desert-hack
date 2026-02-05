@@ -1,5 +1,11 @@
 {
-  "dependencies": {
-    "dotenv": "^17.2.3"
+  "name": "desert-hack",
+  "version": "1.0.0",
+  "description": "Transform Hindi slangs into professional corporate communication",
+  "private": true,
+  "scripts": {
+    "start": "cd frontend && npm start",
+    "build": "cd frontend && npm run build",
+    "install-all": "cd frontend && npm install"
   }
 }

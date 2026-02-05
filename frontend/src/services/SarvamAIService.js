@@ -3,24 +3,34 @@
  * Translates Hindi slangs/casual language into professional corporate communication
  */
 
+// Validate API key on module load
 const SARVAM_API_KEY = process.env.REACT_APP_SARVAM_API_KEY;
+
+if (!SARVAM_API_KEY) {
+  console.warn(
+    'WARNING: REACT_APP_SARVAM_API_KEY is not configured. ' +
+    'Please set it in your .env file. ' +
+    'Copy from .env.example and add your API key.'
+  );
+}
+
 const SARVAM_API_URL = 'https://api.sarvam.ai/v1/chat/completions';
 
 // Tone configurations
 const TONES = {
   formal: {
     label: 'Formal',
-    emoji: '🎩',
+    emoji: '',
     description: 'Highly professional, suitable for senior management and official communications'
   },
   friendly: {
     label: 'Friendly',
-    emoji: '😊',
+    emoji: '',
     description: 'Warm and approachable while maintaining professionalism'
   },
   assertive: {
     label: 'Assertive',
-    emoji: '💪',
+    emoji: '',
     description: 'Confident and direct, good for making strong points'
   }
 };
@@ -104,6 +114,14 @@ Always output ONLY the transformed professional text, no explanations.`;
  * @returns {Promise<{success: boolean, result?: string, error?: string}>}
  */
 export async function translateToCorporate(inputText, tone = 'formal', channel = 'email') {
+  // Validate API key before making request
+  if (!SARVAM_API_KEY) {
+    return {
+      success: false,
+      error: 'API key not configured. Please add REACT_APP_SARVAM_API_KEY to your .env file.'
+    };
+  }
+
   if (!inputText?.trim()) {
     return { success: false, error: 'Please enter some text to translate' };
   }
@@ -134,7 +152,15 @@ export async function translateToCorporate(inputText, tone = 'formal', channel =
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.message || `API request failed with status ${response.status}`);
+      const errorMessage = errorData.message || errorData.error || `API request failed with status ${response.status}`;
+
+      if (response.status === 403) {
+        throw new Error('Invalid API key. Check your REACT_APP_SARVAM_API_KEY in .env');
+      }
+      if (response.status === 429) {
+        throw new Error('Rate limit exceeded. Please try again later.');
+      }
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();
@@ -147,7 +173,11 @@ export async function translateToCorporate(inputText, tone = 'formal', channel =
     return { success: true, result: result.trim() };
 
   } catch (error) {
-    console.error('Sarvam AI Error:', error);
+    console.error('Sarvam AI Error:', {
+      message: error.message,
+      status: error.status,
+      timestamp: new Date().toISOString()
+    });
     return {
       success: false,
       error: error.message || 'Failed to translate. Please try again.'
@@ -175,6 +205,14 @@ export function getChannels() {
  * @returns {Promise<{success: boolean, transcript?: string, error?: string}>}
  */
 export async function speechToText(audioBlob) {
+  // Validate API key before making request
+  if (!SARVAM_API_KEY) {
+    return {
+      success: false,
+      error: 'API key not configured. Please add REACT_APP_SARVAM_API_KEY to your .env file.'
+    };
+  }
+
   if (!audioBlob) {
     return { success: false, error: 'No audio provided' };
   }
@@ -194,17 +232,13 @@ export async function speechToText(audioBlob) {
     });
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error('STT API Error Response Body:', errorText);
-      let errorData = {};
-      try {
-        errorData = JSON.parse(errorText);
-      } catch (e) {
-        // failed to parse
-      }
+      const errorData = await response.json().catch(() => ({}));
+      console.error('STT API Error Details:', errorData);
 
-      const errorMessage = errorData.message || errorData.detail || `STT API failed with status ${response.status}: ${errorText}`;
-      throw new Error(errorMessage);
+      if (response.status === 403) {
+        throw new Error('Invalid API key. Check your REACT_APP_SARVAM_API_KEY in .env');
+      }
+      throw new Error(errorData.message || errorData.detail || `STT API failed with status ${response.status}`);
     }
 
     const data = await response.json();
@@ -217,7 +251,10 @@ export async function speechToText(audioBlob) {
     return { success: true, transcript: transcript.trim() };
 
   } catch (error) {
-    console.error('Sarvam STT Error:', error);
+    console.error('Sarvam STT Error:', {
+      message: error.message,
+      timestamp: new Date().toISOString()
+    });
     return {
       success: false,
       error: error.message || 'Failed to transcribe audio. Please try again.'
@@ -225,9 +262,11 @@ export async function speechToText(audioBlob) {
   }
 }
 
-export default {
+const SarvamAIService = {
   translateToCorporate,
   getTones,
   getChannels,
   speechToText
 };
+
+export default SarvamAIService;
