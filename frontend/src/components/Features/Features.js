@@ -9,7 +9,10 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Features({
   inputText,
   setInputText,
-  onGenerate, 
+  tone,
+  setTone,
+  onGenerate,
+  loading,
 }) {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
@@ -47,11 +50,14 @@ export default function Features({
       </h2>
 
       <div ref={inputRef} className="features-input">
-       <InputSection
-  value={inputText}
-  onChange={setInputText}
-  onGenerate={onGenerate}
-/>
+        <InputSection
+          value={inputText}
+          onChange={setInputText}
+          tone={tone}
+          onToneChange={setTone}
+          onGenerate={onGenerate}
+          loading={loading}
+        />
 
       </div>
     </section>
