@@ -22,9 +22,9 @@ const NAV_ITEMS = {
   ],
 };
 
-export default function App() {
-  const headerRef = useRef(null);        
-  const dropdownRef = useRef(null);    
+export default function App({ theme, toggleTheme }) {
+  const headerRef = useRef(null);
+  const dropdownRef = useRef(null);
   const closeTimeout = useRef(null);
 
   const [activeMenu, setActiveMenu] = useState(null);
@@ -39,7 +39,7 @@ export default function App() {
         opacity: 1,
         duration: 0.6,
         ease: "power2.out",
-        clearProps: "transform", 
+        clearProps: "transform",
       }
     );
   }, []);
@@ -71,33 +71,33 @@ export default function App() {
       setActiveMenu(null);
     }, 120);
   };
-const animateButton = (btn) => {
-  const top = btn.querySelector(".btn-text-top");
-  const bottom = btn.querySelector(".btn-text-bottom");
+  const animateButton = (btn) => {
+    const top = btn.querySelector(".btn-text-top");
+    const bottom = btn.querySelector(".btn-text-bottom");
 
-  gsap.killTweensOf([top, bottom]);
+    gsap.killTweensOf([top, bottom]);
 
-  gsap.fromTo(
-    top,
-    { y: 0, opacity: 1 },
-    { y: -12, opacity: 0, duration: 0.2, ease: "power2.out" }
-  );
+    gsap.fromTo(
+      top,
+      { y: 0, opacity: 1 },
+      { y: -12, opacity: 0, duration: 0.2, ease: "power2.out" }
+    );
 
-  gsap.fromTo(
-    bottom,
-    { y: 12, opacity: 0 },
-    { y: 0, opacity: 1, duration: 0.25, ease: "power2.out", delay: 0.05 }
-  );
-};
+    gsap.fromTo(
+      bottom,
+      { y: 12, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.25, ease: "power2.out", delay: 0.05 }
+    );
+  };
 
   return (
     <div className="header-wrapper">
       <header ref={headerRef} className="floating-header">
         <div className="header-left">
           <div className="brand">
-  <span className="brand-product">Formalize</span>
-  <span className="brand-team">by Teamname</span>
-</div>
+            <span className="brand-product">Formalize</span>
+            <span className="brand-team">by Teamname</span>
+          </div>
 
 
           <nav className="nav">
@@ -132,34 +132,42 @@ const animateButton = (btn) => {
           </nav>
         </div>
 
-<div className="header-right">
-<button
-  className="outline-btn fancy-btn"
-  onMouseEnter={(e) => animateButton(e.currentTarget)}
->
-  <span className="btn-inner">
-    {}
-    <span className="btn-measure">Research</span>
+        <div className="header-right">
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+          >
+            {theme === 'light' ? '🌙' : '☀️'}
+          </button>
 
-    {}
-    <span className="btn-text btn-text-top">Research</span>
-    <span className="btn-text btn-text-bottom">Research</span>
-  </span>
-</button>
+          <button
+            className="outline-btn fancy-btn"
+            onMouseEnter={(e) => animateButton(e.currentTarget)}
+          >
+            <span className="btn-inner">
+              { }
+              <span className="btn-measure">Research</span>
+
+              { }
+              <span className="btn-text btn-text-top">Research</span>
+              <span className="btn-text btn-text-bottom">Research</span>
+            </span>
+          </button>
 
 
-<button
-  className="primary-btn fancy-btn"
-  onMouseEnter={(e) => animateButton(e.currentTarget)}
->
-  <span className="btn-inner">
-    <span className="btn-measure">Download for macOS</span>
-    <span className="btn-text btn-text-top">Download for macOS</span>
-    <span className="btn-text btn-text-bottom">Download for macOS</span>
-  </span>
-</button>
+          <button
+            className="primary-btn fancy-btn"
+            onMouseEnter={(e) => animateButton(e.currentTarget)}
+          >
+            <span className="btn-inner">
+              <span className="btn-measure">Download for macOS</span>
+              <span className="btn-text btn-text-top">Download for macOS</span>
+              <span className="btn-text btn-text-bottom">Download for macOS</span>
+            </span>
+          </button>
 
-</div>
+        </div>
 
 
       </header>

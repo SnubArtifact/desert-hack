@@ -2,16 +2,15 @@
   position: relative;
 
   background: linear-gradient(180deg,
-      #ffffff,
-      #fdfcff);
+      var(--bg-secondary),
+      var(--bg-tertiary));
 
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border-color);
   border-radius: 20px;
 
   padding: 18px 18px 56px;
 
-  box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--card-shadow);
 
   transition:
     border-color 0.2s ease,
@@ -52,7 +51,7 @@
 
   font-size: 15px;
   line-height: 1.6;
-  color: #0f172a;
+  color: var(--text-primary);
 
   padding-right: 130px;
   /* space for actions */
@@ -81,8 +80,8 @@
   height: 36px;
   border-radius: 999px;
 
-  border: 1px solid rgba(15, 23, 42, 0.15);
-  background: #ffffff;
+  border: 1px solid var(--border-active);
+  background: var(--bg-secondary);
 
   cursor: pointer;
   font-size: 14px;
@@ -98,7 +97,7 @@
 }
 
 .mic-btn:hover {
-  background: #f8fafc;
+  background: var(--bg-tertiary);
 }
 
 .mic-btn.active {
@@ -191,7 +190,7 @@
 .tone-label {
   font-size: 13px;
   font-weight: 500;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .tone-options {
@@ -202,21 +201,21 @@
 .tone-btn {
   padding: 6px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  background: #ffffff;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
 
   font-size: 13px;
   font-weight: 500;
-  color: #475569;
+  color: var(--text-secondary);
 
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .tone-btn:hover:not(:disabled) {
-  background: #f8fafc;
+  background: var(--bg-tertiary);
   border-color: rgba(124, 58, 237, 0.3);
-  color: #7c3aed;
+  color: var(--accent-primary);
 }
 
 .tone-btn.active {

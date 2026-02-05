@@ -1,16 +1,23 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import "./ResultCard.css";
 
 const CHANNEL_INFO = {
-    email: { label: "Email", icon: "📧" },
-    linkedin: { label: "LinkedIn Post", icon: "💼" },
-    whatsapp: { label: "WhatsApp", icon: "💬" },
+    email: { label: "Email" },
+    linkedin: { label: "LinkedIn Post" },
+    whatsapp: { label: "WhatsApp" },
 };
 
 export default function ResultCard({ result, loading, error, channel }) {
     const cardRef = useRef(null);
+    const [text, setText] = useState(result || "");
+    const [isEditing, setIsEditing] = useState(false);
     const channelInfo = CHANNEL_INFO[channel] || CHANNEL_INFO.email;
+
+    useEffect(() => {
+        setText(result || "");
+        setIsEditing(false);
+    }, [result]);
 
     useEffect(() => {
         if (cardRef.current) {
@@ -23,10 +30,14 @@ export default function ResultCard({ result, loading, error, channel }) {
     }, [result, loading, error]);
 
     const handleCopy = async () => {
-        if (result) {
-            await navigator.clipboard.writeText(result);
+        if (text) {
+            await navigator.clipboard.writeText(text);
             // Could add a toast notification here
         }
+    };
+
+    const toggleEdit = () => {
+        setIsEditing(!isEditing);
     };
 
     return (
@@ -36,10 +47,18 @@ export default function ResultCard({ result, loading, error, channel }) {
                     <span className="result-channel">
                         {channelInfo.icon} {channelInfo.label}
                     </span>
-                    {result && (
-                        <button className="copy-btn" onClick={handleCopy}>
-                            📋 Copy
-                        </button>
+                    {text && (
+                        <div className="result-actions">
+                            <button
+                                className={`edit-btn ${isEditing ? 'active' : ''}`}
+                                onClick={toggleEdit}
+                            >
+                                {isEditing ? ' Done' : ' Edit'}
+                            </button>
+                            <button className="copy-btn" onClick={handleCopy}>
+                                Copy
+                            </button>
+                        </div>
                     )}
                 </div>
 
@@ -53,13 +72,20 @@ export default function ResultCard({ result, loading, error, channel }) {
 
                     {error && (
                         <div className="result-error">
-                            <span className="error-icon">⚠️</span>
+                            
                             <span>{error}</span>
                         </div>
                     )}
 
-                    {result && !loading && (
-                        <div className="result-text">{result}</div>
+                    {!loading && (
+                        <textarea
+                            className={`result-text editable-result ${isEditing ? 'editing' : ''}`}
+                            value={text}
+                            onChange={(e) => setText(e.target.value)}
+                            readOnly={!isEditing}
+                            placeholder={result ? "" : "Your formalized message will appear here..."}
+                            spellCheck="false"
+                        />
                     )}
                 </div>
             </div>

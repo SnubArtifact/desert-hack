@@ -3,9 +3,9 @@ import "./InputSection.css";
 import { speechToText } from "../../services/SarvamAIService";
 
 const TONES = [
-  { id: "formal", label: "🎩 Formal", description: "Professional & polished" },
-  { id: "friendly", label: "😊 Friendly", description: "Warm & approachable" },
-  { id: "assertive", label: "💪 Assertive", description: "Confident & direct" },
+  { id: "formal", label: " Formal", description: "Professional & polished" },
+  { id: "friendly", label: " Friendly", description: "Warm & approachable" },
+  { id: "assertive", label: " Assertive", description: "Confident & direct" },
 ];
 
 export default function InputSection({ value, onChange, tone, onToneChange, onGenerate, loading }) {
@@ -127,7 +127,7 @@ export default function InputSection({ value, onChange, tone, onToneChange, onGe
           disabled={!value.trim() || loading}
           onClick={onGenerate}
         >
-          {loading ? "Generating..." : "Generate ✨"}
+          {loading ? "Generating..." : "Generate "}
         </button>
       </div>
     </div>
