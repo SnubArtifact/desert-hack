@@ -149,6 +149,7 @@ export default function Editor() {
 
   return (
     <section className="editor-section">
+      <h2 className="editor-title">Try it out</h2>
       <div className="editor-container">
         {/* Top Bar: Tones + Channels */}
         <div className="editor-topbar">
@@ -184,6 +185,10 @@ export default function Editor() {
         <div className="editor-panels">
           {/* Input Panel */}
           <div className="editor-panel input-panel">
+            <div className="panel-header">
+              <span className="panel-label">Input</span>
+              <span className="panel-hint">Your Hindi Slang</span>
+            </div>
             <div className="textarea-wrapper">
               <textarea
                 className="editor-textarea"
@@ -216,6 +221,10 @@ export default function Editor() {
 
           {/* Output Panel */}
           <div className="editor-panel output-panel">
+            <div className="panel-header">
+              <span className="panel-label">Corporate Ready</span>
+              <span className="panel-hint">{channel.charAt(0).toUpperCase() + channel.slice(1)} Format</span>
+            </div>
             <div className="textarea-wrapper">
               <textarea
                 className={`editor-textarea ${isEditing ? "editing" : ""}`}
