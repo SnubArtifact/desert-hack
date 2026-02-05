@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons';
 import "./Header.css";
 
 const NAV_ITEMS = {
@@ -138,7 +140,11 @@ export default function App({ theme, toggleTheme }) {
             onClick={toggleTheme}
             aria-label="Toggle theme"
           >
-            {theme === 'light' ? '🌙' : '☀️'}
+            {theme === 'light' ? (
+              <FontAwesomeIcon icon={faToggleOff} />
+            ) : (
+              <FontAwesomeIcon icon={faToggleOn} style={{ color: "#ffffff" }} />
+            )}
           </button>
 
           <button

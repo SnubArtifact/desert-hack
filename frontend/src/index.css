@@ -13,23 +13,25 @@
   --glass-bg: rgba(255, 255, 255, 0.8);
   --glass-border: rgba(255, 255, 255, 0.5);
   --input-bg: #f8fafc;
+  --grid-color: rgba(124, 58, 237, 0.40);
 }
 
 [data-theme='dark'] {
   /* Dark Theme */
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-tertiary: #1e293b;
+  --bg-primary: #030712;
+  --bg-secondary: #111827;
+  --bg-tertiary: #1f2937;
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --border-color: rgba(255, 255, 255, 0.08);
   --border-active: rgba(255, 255, 255, 0.15);
   --accent-primary: #a78bfa;
   --accent-secondary: #4ade80;
-  --card-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-  --glass-bg: rgba(15, 23, 42, 0.8);
+  --card-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  --glass-bg: rgba(3, 7, 18, 0.9);
   --glass-border: rgba(255, 255, 255, 0.1);
-  --input-bg: #1e293b;
+  --input-bg: #111827;
+  --grid-color: rgba(255, 255, 255, 0.15);
 }
 
 body {
