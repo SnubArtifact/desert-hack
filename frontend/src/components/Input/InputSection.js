@@ -80,6 +80,7 @@ export default function InputSection({ value, onChange, tone, onToneChange, onGe
       recognitionRef.current.stop();
     } else {
       try {
+        onChange(""); // Clear previous comments
         recognitionRef.current.start();
         setListening(true);
       } catch (error) {

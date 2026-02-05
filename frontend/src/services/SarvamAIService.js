@@ -113,7 +113,7 @@ export async function translateToCorporate(inputText, tone = 'formal', channel =
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${SARVAM_API_KEY}`
+        'api-subscription-key': SARVAM_API_KEY
       },
       body: JSON.stringify({
         model: 'sarvam-m',
