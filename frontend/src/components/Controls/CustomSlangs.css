@@ -1,0 +1,129 @@
+.custom-slangs {
+    max-width: 600px;
+    margin: 16px auto 0;
+}
+
+.custom-slangs-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary, #64748b);
+    cursor: pointer;
+    padding: 8px 0;
+    transition: color 0.2s;
+}
+
+.custom-slangs-toggle:hover {
+    color: var(--accent-primary, #a855f7);
+}
+
+.toggle-arrow {
+    transition: transform 0.2s;
+}
+
+.toggle-arrow.open {
+    transform: rotate(180deg);
+}
+
+.custom-slangs-panel {
+    background: var(--glass-bg, rgba(255, 255, 255, 0.9));
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color, rgba(15, 23, 42, 0.1));
+    border-radius: 12px;
+    padding: 14px;
+    margin-top: 8px;
+}
+
+.add-slang-form {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.add-slang-form input {
+    flex: 1;
+    min-width: 120px;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+    background: var(--input-bg, #f8fafc);
+    color: var(--text-primary, #1e293b);
+    transition: border-color 0.2s;
+}
+
+.add-slang-form input::placeholder {
+    color: var(--text-secondary, #64748b);
+}
+
+.add-slang-form input:focus {
+    border-color: var(--accent-primary, #a855f7);
+}
+
+.add-slang-form button {
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #a855f7, #6366f1);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.add-slang-form button:hover {
+    opacity: 0.9;
+}
+
+.slang-error {
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+.slangs-list {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.slang-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: var(--bg-tertiary, #f8fafc);
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.slang-word {
+    font-weight: 600;
+    color: var(--accent-primary, #a855f7);
+}
+
+.slang-meaning {
+    color: var(--text-secondary, #64748b);
+    flex: 1;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary, #94a3b8);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0 4px;
+    transition: color 0.2s;
+}
+
+.remove-btn:hover {
+    color: #ef4444;
+}

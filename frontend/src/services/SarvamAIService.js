@@ -3,6 +3,8 @@
  * Translates Hindi slangs/casual language into professional corporate communication
  */
 
+import { formatSlangsForPrompt } from './CustomSlangsService';
+
 // Validate API key on module load
 const SARVAM_API_KEY = process.env.REACT_APP_SARVAM_API_KEY;
 
@@ -70,6 +72,7 @@ const CHANNEL_FORMATS = {
 function buildSystemPrompt(tone, channel) {
   const toneConfig = TONES[tone] || TONES.formal;
   const channelConfig = CHANNEL_FORMATS[channel] || CHANNEL_FORMATS.email;
+  const customSlangs = formatSlangsForPrompt();
 
   return `You are a language transformation expert specializing in converting Hindi slangs, Hinglish, and casual Indian expressions into polished corporate communication.
 
@@ -101,7 +104,7 @@ Common Hindi slangs to understand:
 - "mast" = great/cool
 - "kya scene hai" = what's the situation
 - "set hai" = it's sorted/arranged
-- And many more...
+- And many more...${customSlangs}
 
 Always output ONLY the transformed professional text, no explanations.`;
 }

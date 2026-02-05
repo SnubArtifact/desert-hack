@@ -3,6 +3,7 @@ import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import Features from "./components/Features/Features";
 import ChannelToast from "./components/Controls/ChannelToast";
+import CustomSlangs from "./components/Controls/CustomSlangs";
 import ResultCard from "./components/Result/ResultCard";
 import { translateToCorporate } from "./services/SarvamAIService";
 
@@ -59,6 +60,8 @@ export default function App() {
         onGenerate={handleGenerate}
         loading={loading}
       />
+
+      <CustomSlangs />
 
       {showChannelToast && (
         <ChannelToast
