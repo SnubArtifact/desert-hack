@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  name         String?
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  // Organization membership
+  orgId String?       @map("org_id")
+  org   Organization? @relation(fields: [orgId], references: [id])
+  role  Role          @default(MEMBER)
+
+  // Personal slangs
+  personalSlangs PersonalSlang[]
+
+  // Org slangs created by this user
+  createdOrgSlangs OrgSlang[]
+
+  // Invitations sent
+  invitations Invitation[]
+
+  @@map("users")
+}
+
+model Organization {
+  id        String   @id @default(uuid())
+  name      String
+  slug      String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+
+  members     User[]
+  slangs      OrgSlang[]
+  templates   Template[]
+  invitations Invitation[]
+
+  @@map("organizations")
+}
+
+model PersonalSlang {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  slang     String
+  meaning   String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([userId, slang])
+  @@map("personal_slangs")
+}
+
+model OrgSlang {
+  id          String       @id @default(uuid())
+  orgId       String       @map("org_id")
+  org         Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  createdById String       @map("created_by_id")
+  createdBy   User         @relation(fields: [createdById], references: [id])
+  slang       String
+  meaning     String
+  isApproved  Boolean      @default(false) @map("is_approved")
+  createdAt   DateTime     @default(now()) @map("created_at")
+
+  @@unique([orgId, slang])
+  @@map("org_slangs")
+}
+
+model Template {
+  id        String       @id @default(uuid())
+  orgId     String       @map("org_id")
+  org       Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  name      String
+  content   String
+  channel   Channel      @default(EMAIL)
+  createdAt DateTime     @default(now()) @map("created_at")
+
+  @@map("templates")
+}
+
+model Invitation {
+  id        String       @id @default(uuid())
+  orgId     String       @map("org_id")
+  org       Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  email     String
+  invitedBy String       @map("invited_by")
+  inviter   User         @relation(fields: [invitedBy], references: [id])
+  token     String       @unique
+  expiresAt DateTime     @map("expires_at")
+  createdAt DateTime     @default(now()) @map("created_at")
+
+  @@map("invitations")
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum Channel {
+  EMAIL
+  LINKEDIN
+  WHATSAPP
+}

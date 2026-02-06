@@ -24,7 +24,7 @@ const NAV_ITEMS = {
   ],
 };
 
-export default function App({ theme, toggleTheme }) {
+export default function App({ theme, toggleTheme, onCompanyClick }) {
   const headerRef = useRef(null);
   const dropdownRef = useRef(null);
   const closeTimeout = useRef(null);
@@ -158,6 +158,18 @@ export default function App({ theme, toggleTheme }) {
               { }
               <span className="btn-text btn-text-top">Research</span>
               <span className="btn-text btn-text-bottom">Research</span>
+            </span>
+          </button>
+
+          <button
+            className="outline-btn fancy-btn"
+            onClick={onCompanyClick}
+            onMouseEnter={(e) => animateButton(e.currentTarget)}
+          >
+            <span className="btn-inner">
+              <span className="btn-measure">Company</span>
+              <span className="btn-text btn-text-top">Company</span>
+              <span className="btn-text btn-text-bottom">Company</span>
             </span>
           </button>
 

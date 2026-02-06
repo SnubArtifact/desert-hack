@@ -1,0 +1,160 @@
+.org-slangs {
+    padding: 20px;
+    background: var(--glass-bg, rgba(255, 255, 255, 0.9));
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 12px;
+}
+
+.org-slangs h3 {
+    margin: 0 0 4px;
+    color: var(--text-primary, #1e293b);
+}
+
+.org-slangs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.export-btn {
+    padding: 6px 12px;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 6px;
+    color: #6366f1;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.export-btn:hover {
+    background: rgba(99, 102, 241, 0.2);
+}
+
+.org-slangs-desc {
+    margin: 0 0 16px;
+    font-size: 13px;
+    color: var(--text-secondary, #64748b);
+}
+
+.org-slangs-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.org-slangs-form input {
+    flex: 1;
+    min-width: 150px;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 8px;
+    font-size: 13px;
+    background: var(--input-bg, #f8fafc);
+    color: var(--text-primary, #1e293b);
+}
+
+.org-slangs-form button {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #a855f7, #6366f1);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.org-slangs-error {
+    color: #ef4444;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.org-slangs-empty,
+.org-slangs-empty-list {
+    text-align: center;
+    color: var(--text-secondary, #64748b);
+    padding: 20px;
+}
+
+.org-slangs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.org-slang-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: var(--bg-tertiary, #f8fafc);
+    border-radius: 8px;
+}
+
+.org-slang-item.pending {
+    background: #fefce8;
+    border: 1px dashed #eab308;
+}
+
+.slang-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.slang-word {
+    font-weight: 600;
+    color: var(--accent-primary, #a855f7);
+}
+
+.slang-meaning {
+    color: var(--text-secondary, #64748b);
+    font-size: 13px;
+}
+
+.slang-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.slang-badge.pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.slang-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.approve-btn {
+    padding: 4px 10px;
+    background: #22c55e;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.delete-btn {
+    padding: 4px 8px;
+    background: none;
+    border: 1px solid #fecaca;
+    border-radius: 4px;
+    color: #dc2626;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background: #fef2f2;
+}

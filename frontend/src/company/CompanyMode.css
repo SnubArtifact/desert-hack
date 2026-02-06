@@ -1,0 +1,143 @@
+.company-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    padding: 20px;
+}
+
+.company-container {
+    background: var(--bg-primary, #fff);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.company-loading {
+    padding: 60px;
+    text-align: center;
+    color: var(--text-secondary, #64748b);
+}
+
+.company-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-color, #e2e8f0);
+    position: sticky;
+    top: 0;
+    background: var(--bg-primary, #fff);
+    z-index: 10;
+}
+
+.company-header h2 {
+    margin: 0;
+    color: var(--text-primary, #1e293b);
+}
+
+.company-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.company-user {
+    font-size: 13px;
+    color: var(--text-secondary, #64748b);
+}
+
+.company-header-right {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.company-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--text-secondary, #64748b);
+    cursor: pointer;
+    padding: 4px;
+}
+
+.company-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.company-btn.primary {
+    background: linear-gradient(135deg, #a855f7, #6366f1);
+    border: none;
+    color: white;
+}
+
+.company-btn.outline {
+    background: none;
+    border: 1px solid var(--border-color, #e2e8f0);
+    color: var(--text-secondary, #64748b);
+}
+
+.company-btn:hover {
+    opacity: 0.9;
+}
+
+.company-login-prompt {
+    text-align: center;
+    padding: 60px 40px;
+}
+
+.company-login-prompt h3 {
+    margin: 0 0 8px;
+    color: var(--text-primary, #1e293b);
+}
+
+.company-login-prompt p {
+    margin: 0 0 24px;
+    color: var(--text-secondary, #64748b);
+}
+
+.company-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border-color, #e2e8f0);
+    padding: 0 24px;
+}
+
+.company-tabs button {
+    background: none;
+    border: none;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary, #64748b);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.2s;
+}
+
+.company-tabs button:hover {
+    color: var(--text-primary, #1e293b);
+}
+
+.company-tabs button.active {
+    color: var(--accent-primary, #a855f7);
+    border-bottom-color: var(--accent-primary, #a855f7);
+}
+
+.company-content {
+    padding: 24px;
+}

@@ -1,0 +1,191 @@
+.templates-container {
+    padding: 20px;
+}
+
+.templates-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.templates-header h3 {
+    margin: 0;
+    color: var(--text-primary, #fff);
+}
+
+.add-template-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--accent-color, #6366f1);
+    background: transparent;
+    color: var(--accent-color, #6366f1);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.add-template-btn:hover {
+    background: var(--accent-color, #6366f1);
+    color: #fff;
+}
+
+.templates-error {
+    padding: 12px;
+    background: rgba(255, 100, 100, 0.1);
+    border: 1px solid rgba(255, 100, 100, 0.3);
+    border-radius: 8px;
+    color: #ff6b6b;
+    margin-bottom: 16px;
+}
+
+.templates-loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted, #888);
+}
+
+.template-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    background: var(--card-bg, rgba(255, 255, 255, 0.05));
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.template-form input,
+.template-form select,
+.template-form textarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+    background: var(--input-bg, rgba(0, 0, 0, 0.2));
+    color: var(--text-primary, #fff);
+    font-size: 14px;
+}
+
+.template-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.save-template-btn {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: var(--accent-color, #6366f1);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.save-template-btn:hover {
+    background: var(--accent-hover, #5558dd);
+}
+
+.no-templates {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted, #888);
+    background: var(--card-bg, rgba(255, 255, 255, 0.03));
+    border-radius: 12px;
+}
+
+.templates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.template-card {
+    background: var(--card-bg, rgba(255, 255, 255, 0.05));
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.template-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.template-name {
+    font-weight: 600;
+    color: var(--text-primary, #fff);
+}
+
+.template-channel {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.template-channel.email {
+    background: rgba(99, 102, 241, 0.2);
+    color: #818cf8;
+}
+
+.template-channel.whatsapp {
+    background: rgba(34, 197, 94, 0.2);
+    color: #4ade80;
+}
+
+.template-channel.linkedin {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+}
+
+.template-content {
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text-secondary, #aaa);
+    line-height: 1.5;
+    white-space: pre-wrap;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.template-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.template-actions button {
+    flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.copy-btn {
+    background: rgba(99, 102, 241, 0.2);
+    color: #818cf8;
+}
+
+.copy-btn:hover {
+    background: rgba(99, 102, 241, 0.4);
+}
+
+.delete-btn {
+    background: rgba(255, 100, 100, 0.1);
+    color: #ff6b6b;
+}
+
+.delete-btn:hover {
+    background: rgba(255, 100, 100, 0.3);
+}

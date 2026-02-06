@@ -4,6 +4,7 @@ import { faMicrophone, faCopy, faCheck, faPen, faEnvelope } from "@fortawesome/f
 import { faWhatsapp, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { getSlangs, addSlang, removeSlang } from "../../services/CustomSlangsService";
 import { translateToCorporate, speechToText } from "../../services/SarvamAIService";
+import { getSlangs as getOrgSlangs } from "../../company/services/api";
 import "./Editor.css";
 
 const TONES = [
@@ -37,6 +38,7 @@ export default function Editor() {
 
   // Slangs state
   const [slangs, setSlangs] = useState([]);
+  const [orgSlangs, setOrgSlangs] = useState([]);
   const [slangsExpanded, setSlangsExpanded] = useState(false);
   const [newSlang, setNewSlang] = useState("");
   const [newMeaning, setNewMeaning] = useState("");
@@ -44,6 +46,17 @@ export default function Editor() {
 
   useEffect(() => {
     setSlangs(getSlangs());
+    // Fetch org slangs if user is logged in
+    const token = localStorage.getItem('formalize_token');
+    if (token) {
+      getOrgSlangs()
+        .then(data => {
+          if (data.org && data.org.length > 0) {
+            setOrgSlangs(data.org);
+          }
+        })
+        .catch(() => { }); // Silently fail if not logged in
+    }
   }, []);
 
   const wordCount = (text) => {
@@ -58,7 +71,7 @@ export default function Editor() {
     setOutputText("");
     setIsEditing(false);
 
-    const response = await translateToCorporate(inputText, tone, channel);
+    const response = await translateToCorporate(inputText, tone, channel, orgSlangs);
     setLoading(false);
 
     if (response.success) {

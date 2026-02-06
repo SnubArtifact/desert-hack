@@ -1,0 +1,92 @@
+.analytics-container {
+    padding: 20px;
+}
+
+.analytics-container h3 {
+    margin: 0 0 20px;
+    color: var(--text-primary, #fff);
+}
+
+.analytics-loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted, #888);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: var(--card-bg, rgba(255, 255, 255, 0.05));
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent-color, #6366f1);
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: var(--text-muted, #888);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-card.approved .stat-value {
+    color: #22c55e;
+}
+
+.stat-card.pending .stat-value {
+    color: #f59e0b;
+}
+
+.top-slangs {
+    background: var(--card-bg, rgba(255, 255, 255, 0.03));
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.top-slangs h4 {
+    margin: 0 0 16px;
+    color: var(--text-primary, #fff);
+    font-size: 14px;
+}
+
+.slangs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.slang-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.slang-word {
+    color: #818cf8;
+    font-weight: 500;
+}
+
+.slang-arrow {
+    color: var(--text-muted, #666);
+}
+
+.slang-meaning {
+    color: var(--text-secondary, #aaa);
+    flex: 1;
+}

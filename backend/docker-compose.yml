@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: formalize
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: formalize
+    ports:
+      - "5436:5432"
+    volumes:
+      - formalize_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  formalize_postgres_data:

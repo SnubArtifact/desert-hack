@@ -68,11 +68,21 @@ const CHANNEL_FORMATS = {
 
 /**
  * Build the system prompt for Hindi slang translation
+ * @param {string} tone - The tone to use
+ * @param {string} channel - The output channel
+ * @param {Array} orgSlangs - Optional org slangs [{slang, meaning}]
  */
-function buildSystemPrompt(tone, channel) {
+function buildSystemPrompt(tone, channel, orgSlangs = []) {
   const toneConfig = TONES[tone] || TONES.formal;
   const channelConfig = CHANNEL_FORMATS[channel] || CHANNEL_FORMATS.email;
   const customSlangs = formatSlangsForPrompt();
+
+  // Format org slangs if provided
+  let orgSlangsText = '';
+  if (orgSlangs && orgSlangs.length > 0) {
+    orgSlangsText = '\n\nCompany-specific slangs (PRIORITY - always use these):\n' +
+      orgSlangs.map(s => `- "${s.slang}" = ${s.meaning}`).join('\n');
+  }
 
   return `You are a language transformation expert specializing in converting Hindi slangs, Hinglish, and casual Indian expressions into polished corporate communication.
 
@@ -104,7 +114,7 @@ Common Hindi slangs to understand:
 - "mast" = great/cool
 - "kya scene hai" = what's the situation
 - "set hai" = it's sorted/arranged
-- And many more...${customSlangs}
+- And many more...${customSlangs}${orgSlangsText}
 
 Always output ONLY the transformed professional text, no explanations.`;
 }
@@ -114,9 +124,10 @@ Always output ONLY the transformed professional text, no explanations.`;
  * @param {string} inputText - The casual/slang Hindi text to translate
  * @param {string} tone - The tone to use (formal, friendly, assertive)
  * @param {string} channel - The output channel (email, linkedin, whatsapp)
+ * @param {Array} orgSlangs - Optional org slangs [{slang, meaning}]
  * @returns {Promise<{success: boolean, result?: string, error?: string}>}
  */
-export async function translateToCorporate(inputText, tone = 'formal', channel = 'email') {
+export async function translateToCorporate(inputText, tone = 'formal', channel = 'email', orgSlangs = []) {
   // Validate API key before making request
   if (!SARVAM_API_KEY) {
     return {
@@ -141,7 +152,7 @@ export async function translateToCorporate(inputText, tone = 'formal', channel =
         messages: [
           {
             role: 'system',
-            content: buildSystemPrompt(tone, channel)
+            content: buildSystemPrompt(tone, channel, orgSlangs)
           },
           {
             role: 'user',
