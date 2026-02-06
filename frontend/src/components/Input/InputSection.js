@@ -15,9 +15,18 @@ export default function InputSection({ value, onChange, tone, onToneChange, onGe
   const [processingAudio, setProcessingAudio] = useState(false);
   const [micError, setMicError] = useState("");
 
+  // Clear text when recording starts
+  useEffect(() => {
+    if (listening) {
+      console.log("Listening state true - clearing text");
+      onChange("");
+    }
+  }, [listening]);
+
   const startRecording = async () => {
     try {
       setMicError("");
+      // onChange(""); // Removed, handled by useEffect
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       // MediaRecorder defaults to webm/opus in Chrome/Firefox or mp4/aac in Safari often
       // We explicitly request audio/webm if possible, or fallback to default
@@ -46,8 +55,7 @@ export default function InputSection({ value, onChange, tone, onToneChange, onGe
         const response = await speechToText(audioBlob);
 
         if (response.success) {
-          const newValue = value + (value ? " " : "") + response.transcript;
-          onChange(newValue);
+          onChange(response.transcript);
         } else {
           setMicError(response.error || "Failed to transcribe audio");
         }

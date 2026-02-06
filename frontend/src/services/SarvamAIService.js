@@ -224,7 +224,10 @@ export async function speechToText(audioBlob) {
     const formData = new FormData();
     formData.append('file', audioBlob, 'recording.webm');
     formData.append('model', 'saarika:v2.5');
-    formData.append('language_code', 'hi-IN');
+    // Prompt helps the model understand the context and expected languages
+    formData.append('prompt', 'Hindi and English mixed corporate conversation');
+    // Remove language_code to allow auto-detection
+    // formData.append('language_code', 'hi-IN');
 
     const response = await fetch('https://api.sarvam.ai/speech-to-text', {
       method: 'POST',
