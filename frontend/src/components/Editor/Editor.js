@@ -151,9 +151,10 @@ export default function Editor() {
     <section className="editor-section">
       <h2 className="editor-title">Try it out</h2>
       <div className="editor-container">
-        {/* Top Bar: Tones + Channels */}
+        {/* Top Bar: Tone Selection */}
         <div className="editor-topbar">
           <div className="editor-tones">
+            <span className="editor-label">Pick Tone:</span>
             {TONES.map((t) => (
               <button
                 key={t.id}
@@ -162,20 +163,6 @@ export default function Editor() {
                 disabled={loading}
               >
                 {t.label}
-              </button>
-            ))}
-          </div>
-          <div className="editor-channels">
-            {CHANNELS.map((c) => (
-              <button
-                key={c.id}
-                className={`channel-chip ${channel === c.id ? "active" : ""}`}
-                onClick={() => setChannel(c.id)}
-                disabled={loading}
-                title={c.label}
-              >
-                <FontAwesomeIcon icon={c.icon} />
-                <span className="channel-label">{c.label}</span>
               </button>
             ))}
           </div>
@@ -202,7 +189,7 @@ export default function Editor() {
               <span className="word-count">{wordCount(inputText)} words</span>
               <div className="panel-actions">
                 <button className="sample-btn" onClick={handleTrySample} disabled={loading}>
-                  Try a sample ✨
+                  Try a sample
                 </button>
                 <button
                   className={`mic-btn ${listening ? "active" : ""}`}
@@ -222,8 +209,21 @@ export default function Editor() {
           {/* Output Panel */}
           <div className="editor-panel output-panel">
             <div className="panel-header">
-              <span className="panel-label">Corporate Ready</span>
-              <span className="panel-hint">{channel.charAt(0).toUpperCase() + channel.slice(1)} Format</span>
+              <span className="panel-label">Post to:</span>
+              <div className="editor-channels">
+                {CHANNELS.map((c) => (
+                  <button
+                    key={c.id}
+                    className={`channel-chip ${channel === c.id ? "active" : ""}`}
+                    onClick={() => setChannel(c.id)}
+                    disabled={loading}
+                    title={c.label}
+                  >
+                    <FontAwesomeIcon icon={c.icon} />
+                    <span className="channel-label">{c.label}</span>
+                  </button>
+                ))}
+              </div>
             </div>
             <div className="textarea-wrapper">
               <textarea
@@ -231,30 +231,30 @@ export default function Editor() {
                 placeholder="Formalized text will appear here..."
                 value={outputText}
                 onChange={(e) => setOutputText(e.target.value)}
-                readOnly={!isEditing && !outputText}
+                readOnly={!isEditing}
               />
               {error && <div className="editor-error">{error}</div>}
             </div>
             <div className="panel-footer">
               <span className="word-count">{wordCount(outputText)} words</span>
-              <div className="panel-actions">
-                <button
-                  className={`edit-btn ${isEditing ? "active" : ""}`}
-                  onClick={() => setIsEditing(!isEditing)}
-                  disabled={!outputText}
-                >
-                  <FontAwesomeIcon icon={faPen} />
-                  {isEditing ? " Done" : " Edit"}
-                </button>
-                <button
-                  className="copy-btn"
-                  onClick={handleCopy}
-                  disabled={!outputText}
-                >
-                  <FontAwesomeIcon icon={copied ? faCheck : faCopy} />
-                  {copied ? " Copied!" : " Copy"}
-                </button>
-              </div>
+              {outputText && (
+                <div className="panel-actions">
+                  <button
+                    className={`edit-btn ${isEditing ? "active" : ""}`}
+                    onClick={() => setIsEditing(!isEditing)}
+                  >
+                    <FontAwesomeIcon icon={faPen} />
+                    {isEditing ? " Done" : " Edit"}
+                  </button>
+                  <button
+                    className="copy-btn"
+                    onClick={handleCopy}
+                  >
+                    <FontAwesomeIcon icon={copied ? faCheck : faCopy} />
+                    {copied ? " Copied!" : " Copy"}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

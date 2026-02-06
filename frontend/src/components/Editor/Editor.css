@@ -92,10 +92,23 @@
   color: var(--text-primary);
 }
 
+.editor-label {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-right: 12px;
+}
+
 .channel-chip.active {
-  background: var(--bg-tertiary);
-  color: var(--accent-primary);
+  background: var(--accent-primary);
+  color: white;
   border-color: var(--accent-primary);
+}
+
+.channel-chip.active .channel-label {
+  color: white;
 }
 
 .channel-label {
@@ -127,10 +140,10 @@
 
 /* Panel Header */
 .panel-header {
-  height: 48px;
+  height: 60px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
   padding: 0 24px;
   background: var(--bg-tertiary);
   border-bottom: 1px solid var(--border-color);
@@ -141,7 +154,7 @@
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   color: var(--accent-primary);
 }
 
@@ -149,14 +162,6 @@
   font-size: 11px;
   color: var(--text-secondary);
   font-weight: 500;
-}
-
-.textarea-wrapper {
-  flex: 1;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
 }
 
 .editor-textarea {
@@ -182,21 +187,32 @@
   background: var(--bg-tertiary);
 }
 
+.textarea-wrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.textarea-wrapper .editor-textarea {
+  flex: 1;
+}
+
 .editor-error {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 8px 24px;
+  bottom: 10px;
+  left: 24px;
+  right: 24px;
+  padding: 10px 16px;
   background: #fef2f2;
   color: #dc2626;
   font-size: 13px;
-  border-bottom: 1px solid #fecaca;
-  z-index: 10;
+  border-radius: 8px;
+  border: 1px solid #fecaca;
 }
 
 .panel-footer {
-  height: 56px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
