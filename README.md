@@ -1,9 +1,9 @@
-# Formalize - Hindi Slang to Corporate Communication
+# Formalize -  Slang to Corporate Communication
 
-Transform Hindi slangs into professional corporate communication using AI.
+Transform slangs into professional corporate communication using AI.
 
 ## Features
-- Speech-to-Text (Hindi)
+- Speech-to-Text (Any language)
 - Multiple Tones (Formal, Friendly, Assertive)
 - Channel-Specific (Email, LinkedIn, WhatsApp)
 - Real-time Translation
