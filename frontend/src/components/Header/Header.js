@@ -1,13 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faToggleOn, faToggleOff, faSignature } from '@fortawesome/free-solid-svg-icons';
 import "./Header.css";
-
-const NAV_LINKS = [
-  { label: "Home", href: "#hero" },
-  { label: "Tool", href: "#translator" },
-];
 
 export default function App({ theme, toggleTheme }) {
   const headerRef = useRef(null);
@@ -29,39 +24,24 @@ export default function App({ theme, toggleTheme }) {
   return (
     <div className="header-wrapper">
       <header ref={headerRef} className="floating-header">
-        <div className="header-left">
-          <div className="brand" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ cursor: 'pointer' }}>
-            <div className="brand-logo">
-              <FontAwesomeIcon icon={faSignature} />
-            </div>
-            <div className="brand-info">
-              <span className="brand-product">Formalize</span>
-
-            </div>
+        <div className="brand" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ cursor: 'pointer' }}>
+          <div className="brand-logo">
+            <FontAwesomeIcon icon={faSignature} />
           </div>
-
-          <nav className="nav">
-            {NAV_LINKS.map((link) => (
-              <a key={link.label} href={link.href} className="nav-link">
-                {link.label}
-              </a>
-            ))}
-          </nav>
+          <span className="brand-product">Formalize</span>
         </div>
 
-        <div className="header-right">
-          <button
-            className="theme-toggle"
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-          >
-            {theme === 'light' ? (
-              <FontAwesomeIcon icon={faToggleOff} />
-            ) : (
-              <FontAwesomeIcon icon={faToggleOn} style={{ color: "#ffffff" }} />
-            )}
-          </button>
-        </div>
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+        >
+          {theme === 'light' ? (
+            <FontAwesomeIcon icon={faToggleOff} />
+          ) : (
+            <FontAwesomeIcon icon={faToggleOn} style={{ color: "#ffffff" }} />
+          )}
+        </button>
       </header>
     </div>
   );

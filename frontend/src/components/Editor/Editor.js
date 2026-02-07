@@ -503,7 +503,7 @@ export default function Editor() {
               <button className="add-btn" onClick={handleAddSlang}>+ Add</button>
             </div>
             {slangError && <div className="slang-error">{slangError}</div>}
-            {slangSuccess && <div className="slang-success-msg">Slang added successfully! ✨</div>}
+            {slangSuccess && <div className="slang-success-msg">Slang added successfully!</div>}
             {slangs.length > 0 && (
               <div className="slangs-list">
                 {slangs.map((s) => (

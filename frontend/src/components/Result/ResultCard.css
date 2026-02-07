@@ -1,3 +1,5 @@
+/* Premium Result Card */
+
 .result-section {
     max-width: 900px;
     margin: 32px auto 48px;
@@ -6,24 +8,17 @@
 
 .result-card {
     position: relative;
-    background: linear-gradient(180deg, var(--bg-secondary), var(--bg-tertiary));
+    background: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: var(--card-shadow);
+    border-radius: var(--radius-xl);
+    padding: 24px;
+    box-shadow: var(--shadow-md);
     overflow: hidden;
+    transition: all 0.3s ease;
 }
 
-/* Subtle premium texture */
-.result-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(circle at bottom right,
-            rgba(34, 197, 94, 0.06),
-            transparent 60%);
-    pointer-events: none;
+.result-card:hover {
+    box-shadow: var(--shadow-lg);
 }
 
 .result-header {
@@ -31,17 +26,17 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 16px;
-    padding-bottom: 12px;
+    padding-bottom: 14px;
     border-bottom: 1px solid var(--border-color);
 }
 
 .result-channel {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
-    color: #7c3aed;
+    color: var(--accent-primary);
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
 }
 
 .result-actions {
@@ -52,40 +47,28 @@
 
 .copy-btn,
 .edit-btn {
-    padding: 6px 14px;
-    border-radius: 999px;
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
     background: var(--bg-secondary);
     font-size: 13px;
     font-weight: 500;
     color: var(--text-secondary);
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
 }
 
 .copy-btn:hover,
 .edit-btn:hover {
-    background: #f0fdf4;
-    border-color: #22c55e;
-    color: #16a34a;
-}
-
-.edit-btn:hover {
-    background: #f8fafc;
-    border-color: #64748b;
-    color: #475569;
+    background: var(--bg-tertiary);
+    border-color: var(--border-focus);
+    color: var(--text-primary);
 }
 
 .edit-btn.active {
-    background: #475569;
-    color: white;
-    border-color: #475569;
-}
-
-.edit-btn.active:hover {
-    background: #334155;
-    border-color: #334155;
-    color: white;
+    background: var(--btn-primary);
+    color: var(--bg-primary);
+    border-color: var(--btn-primary);
 }
 
 .result-content {
@@ -99,28 +82,26 @@
     white-space: pre-wrap;
     word-break: break-word;
     width: 100%;
-    min-height: 250px;
+    min-height: 200px;
     border: 1px solid transparent;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     background: transparent;
     outline: none;
     resize: none;
     font-family: inherit;
-    padding: 8px;
-    margin: -8px;
-    /* Compensate for padding */
+    padding: 12px;
+    margin: -12px;
     transition: all 0.2s ease;
 }
 
 .result-text.editing {
-    background: var(--bg-secondary);
-    border-color: var(--border-active);
+    background: var(--bg-tertiary);
+    border-color: var(--border-color);
     resize: vertical;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .result-text::placeholder {
-    color: #94a3b8;
+    color: var(--text-muted);
     font-style: italic;
 }
 
@@ -131,7 +112,7 @@
     align-items: center;
     justify-content: center;
     gap: 16px;
-    padding: 32px 0;
+    padding: 40px 0;
     color: var(--text-secondary);
     font-size: 14px;
 }
@@ -139,8 +120,8 @@
 .loading-spinner {
     width: 32px;
     height: 32px;
-    border: 3px solid rgba(124, 58, 237, 0.2);
-    border-top-color: #7c3aed;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--accent-primary);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
 }
@@ -158,7 +139,7 @@
     gap: 10px;
     padding: 16px;
     background: #fef2f2;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     color: #dc2626;
     font-size: 14px;
 }

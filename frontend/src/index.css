@@ -1,55 +1,126 @@
+/* Premium SaaS Design System */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 :root {
-  /* Light Theme - Clean SaaS Palette */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f9fafb;
-  --bg-tertiary: #f3f4f6;
-  --text-primary: #111827;
-  --text-secondary: #4b5563;
-  --border-color: #e5e7eb;
-  --border-active: #d1d5db;
-  --accent-primary: #2563eb;
-  /* Professional Blue */
-  --accent-secondary: #10b981;
-  --accent-glow: rgba(37, 99, 235, 0.1);
-  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  --glass-bg: rgba(255, 255, 255, 0.95);
-  --glass-border: #e5e7eb;
-  --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --input-bg: #f9fafb;
+  /* Sophisticated Light Theme */
+  --bg-primary: #fafafa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f4f4f5;
+  --bg-elevated: #ffffff;
+
+  --text-primary: #09090b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+
+  --border-color: #e4e4e7;
+  --border-subtle: #f4f4f5;
+  --border-focus: #18181b;
+
+  /* Premium Accent - Emerald */
+  --accent-primary: #10b981;
+  --accent-hover: #059669;
+  --accent-subtle: rgba(16, 185, 129, 0.1);
+  --accent-glow: rgba(16, 185, 129, 0.2);
+
+  /* Neutral Button Colors */
+  --btn-primary: #18181b;
+  --btn-primary-hover: #27272a;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+
+  /* Card specific */
+  --card-bg: #ffffff;
+  --card-border: #e4e4e7;
+  --card-shadow: var(--shadow-sm);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
 }
 
 [data-theme='dark'] {
-  /* Dark Theme - Sophisticated Charcoal */
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-tertiary: #334155;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --border-color: #334155;
-  --border-active: #475569;
-  --accent-primary: #3b82f6;
-  --accent-secondary: #34d399;
-  --accent-glow: rgba(59, 130, 246, 0.15);
-  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-  --glass-bg: rgba(30, 41, 59, 0.95);
-  --glass-border: #334155;
-  --glass-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
-  --input-bg: #0f172a;
+  /* Elegant Dark Theme */
+  --bg-primary: #09090b;
+  --bg-secondary: #18181b;
+  --bg-tertiary: #27272a;
+  --bg-elevated: #1f1f23;
+
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+
+  --border-color: #27272a;
+  --border-subtle: #1f1f23;
+  --border-focus: #52525b;
+
+  --accent-primary: #34d399;
+  --accent-hover: #6ee7b7;
+  --accent-subtle: rgba(52, 211, 153, 0.12);
+  --accent-glow: rgba(52, 211, 153, 0.25);
+
+  --btn-primary: #fafafa;
+  --btn-primary-hover: #f4f4f5;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+
+  --card-bg: #18181b;
+  --card-border: #27272a;
+  --card-shadow: var(--shadow-md);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  margin: 0;
-  font-family: montserrat sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-primary);
   color: var(--text-primary);
+  line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Selection styling */
+::selection {
+  background: var(--accent-subtle);
+  color: var(--text-primary);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
 code {
-  font-family: montserrat, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
 }
