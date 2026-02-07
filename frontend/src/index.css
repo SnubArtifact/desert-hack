@@ -1,44 +1,47 @@
 :root {
-  /* Light Theme (Default) */
+  /* Light Theme - Clean SaaS Palette */
   --bg-primary: #ffffff;
-  --bg-secondary: #fdfcff;
-  --bg-tertiary: #f8fafc;
-  --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  --border-color: rgba(15, 23, 42, 0.08);
-  --border-active: rgba(15, 23, 42, 0.15);
-  --accent-primary: #7c3aed;
-  --accent-secondary: #22c55e;
-  --card-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
-  --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-border: rgba(255, 255, 255, 0.5);
-  --input-bg: #f8fafc;
-  --grid-color: rgba(124, 58, 237, 0.40);
+  --bg-secondary: #f9fafb;
+  --bg-tertiary: #f3f4f6;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --border-color: #e5e7eb;
+  --border-active: #d1d5db;
+  --accent-primary: #2563eb;
+  /* Professional Blue */
+  --accent-secondary: #10b981;
+  --accent-glow: rgba(37, 99, 235, 0.1);
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --glass-border: #e5e7eb;
+  --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --input-bg: #f9fafb;
 }
 
 [data-theme='dark'] {
-  /* Dark Theme */
-  --bg-primary: #030712;
-  --bg-secondary: #111827;
-  --bg-tertiary: #1f2937;
+  /* Dark Theme - Sophisticated Charcoal */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-active: rgba(255, 255, 255, 0.15);
-  --accent-primary: #a78bfa;
-  --accent-secondary: #4ade80;
-  --card-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-  --glass-bg: rgba(3, 7, 18, 0.9);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --input-bg: #111827;
-  --grid-color: rgba(255, 255, 255, 0.15);
+  --border-color: #334155;
+  --border-active: #475569;
+  --accent-primary: #3b82f6;
+  --accent-secondary: #34d399;
+  --accent-glow: rgba(59, 130, 246, 0.15);
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --glass-bg: rgba(30, 41, 59, 0.95);
+  --glass-border: #334155;
+  --glass-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  --input-bg: #0f172a;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: montserrat sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-primary);
@@ -47,6 +50,6 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: montserrat, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }

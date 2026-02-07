@@ -44,7 +44,7 @@ export default function Features({
   }, []);
 
   return (
-    <section ref={sectionRef} className="features">
+    <section id="features" ref={sectionRef} className="features">
       <h2 ref={titleRef} className="features-title">
         Try it out
       </h2>

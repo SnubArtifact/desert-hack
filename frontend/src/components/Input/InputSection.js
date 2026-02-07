@@ -91,7 +91,7 @@ export default function InputSection({ value, onChange, tone, onToneChange, onGe
     <div className="input-card">
       <textarea
         className="text-input"
-        placeholder="Type or speak your Hindi slang here… e.g., 'Yaar, boss ko batana hai ki project late ho jayega'"
+        placeholder="Type or speak your slang here… e.g., 'Yaar, boss ko batana hai ki project late ho jayega'"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         rows={4}
